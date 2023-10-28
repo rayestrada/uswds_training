@@ -1,0 +1,13 @@
+base:
+  version: VERSION
+  dependencies:
+    - uswds_theme/uswds
+
+uswds:
+  version: VERSION
+  css:
+    component:
+      dist/css/styles.css: {}
+  js:
+    dist/js/uswds-init.js: {}
+    dist/js/uswds.js: {}

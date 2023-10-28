@@ -1,0 +1,3 @@
+# Ignore Theme dist files
+node_modules
+dist
