@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS icon list component.
+ *
+ * USWDS template variables:
+ * - icon_list_content: renderable field object value
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-icon-list.html.twig' with {
+ *   'icon_list_content': var_icon_list_content | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+{% set usa_classes = [
+  'usa-icon-list',
+] %}
+
+<ul{{ attributes.addClass(usa_classes | merge(classes | default([]))).removeAttribute('role').setAttribute('role', 'list') }}>
+  {{ icon_list_content }}
+</ul>

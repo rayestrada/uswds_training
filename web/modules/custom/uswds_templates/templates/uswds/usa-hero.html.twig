@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS hero component.
+ *
+ * USWDS template variables:
+ * - image_style_url: url string
+ * - title_eyebrow: string
+ * - title: string
+ * - text: string
+ * - link_title: string
+ * - link_url: url string
+ * - classes: classes array
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-hero.html.twig' with {
+ *   'image_style_url': var_image_url,
+ *   'title_eyebrow': var_title_eyebrow | field_value,
+ *   'title': var_title | field_value,
+ *   'text': var_text | field_value,
+ *   'link_title': var_link_title,
+ *   'link_url': var_url,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+{% set usa_attributes = create_attribute() %}
+
+{% set usa_classes = [
+  'usa-hero',
+] %}
+
+<section{{ usa_attributes.addClass(usa_classes | merge(classes | default([]))).setAttribute('aria-label', ('Introduction'|t)  ) }}
+  style="background-image: url('{{ image_style_url }}')">
+  <div class="grid-container">
+    <div class="usa-hero__callout">
+      <h1 class="usa-hero__heading">
+        {% if title_eyebrow %}
+          <span class="usa-hero__heading--alt">
+                {{ title_eyebrow }}
+              </span>
+        {% endif %}
+        {{ title }}
+      </h1>
+      {% if text %}
+        <p>{{ text }}</p>
+      {% endif %}
+      {% if link_title and link_url %}
+        <a class="usa-button"
+           href="{{ link_url }}"
+           title="{{ link_title }}">
+          {{ link_title }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>

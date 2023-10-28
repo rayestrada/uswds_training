@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS icon list item component.
+ *
+ * USWDS template variables:
+ * - icon: string
+ * - text: string
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-icon-list--item.html.twig' with {
+ *   'icon': var_icon | field_value,
+ *   'text': var_text | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+
+{% set usa_classes = [
+  'usa-icon-list__item',
+] %}
+
+<li{{ attributes.addClass(usa_classes | merge(classes | default([]))) }}>
+  <div class="usa-icon-list__icon text-green">
+    <svg class="usa-icon" aria-hidden="true" role="img">
+      <use xlink:href="{{ directory }}/dist/assets/img/sprite.svg#{{ icon }}"></use>
+    </svg>
+  </div>
+  <div class="usa-icon-list__content">
+    {{ text }}
+  </div>
+</li>

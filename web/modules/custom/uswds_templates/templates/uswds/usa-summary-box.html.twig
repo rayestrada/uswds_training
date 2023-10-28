@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS summary box component.
+ *
+ * USWDS template variables:
+ * - id: numeric string
+ * - heading: string
+ * - text: string
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-summary-box.html.twig' with {
+ *   'id': var_id,
+ *   'heading': var_heading | field_value,
+ *   'text': var_text | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+{% set usa_classes = [
+  'usa-summary-box',
+] %}
+
+<div{{ attributes.addClass(usa_classes | merge(classes | default([]))).setAttribute('role', 'region').setAttribute('aria-labelledby', 'summary-box-' ~ id) }}>
+    <div class="usa-summary-box__body">
+      {% if heading %}
+        <h2 id="summary-box-{{ id }}" class="usa-summary-box__heading">
+          {{ heading }}
+        </h2>
+      {% endif %}
+      {% if text %}
+        <div class="usa-summary-box__text">
+          {{ text }}
+        </div>
+      {% endif %}
+    </div>
+</div>

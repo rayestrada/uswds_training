@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS collection item component.
+ *
+ * USWDS template variables:
+ * - is_media_thumbnail: boolean (true / false)
+ * - is_calendar_display: boolean (true / false)
+ * - is_headings_only: boolean (true / false)
+ * - image: string
+ * - date: unix timestamp string
+ * - heading: string
+ * - text: string
+ * - author_name: string
+ * - source: string
+ * - tags: array of renderable items
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-collection--item.html.twig' with {
+ *   'is_media_thumbnail': var_media,
+ *   'is_calendar_display': var_calendar,
+ *   'is_headings_only': var_headings,
+ *   'image': var_image,
+ *   'date': node.created.getString(),
+ *   'heading': var_heading | field_value,
+ *   'text': var_text | field_value,
+ *   'author_name': author_name,
+ *   'source': var_source | field_value,
+ *   'tags': content.field_bx_tags | children,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+
+{% set usa_classes = [
+  'usa-collection__item',
+] %}
+
+<li{{ attributes.addClass(usa_classes | merge(classes | default([]))) }}>
+  {% if is_media_thumbnail and image %}
+    <div class="usa-collection__img">{{ image }}</div>
+  {% endif %}
+  {% if is_calendar_display and date %}
+    <div class="usa-collection__calendar-date">
+      <time datetime="{{ date | format_date('custom', 'Y-m-d\\TH:i:sP') }}"><span class="usa-collection__calendar-date-month">{{ date | format_date('custom', 'M') }}</span>
+        <span class="usa-collection__calendar-date-day">{{ date | format_date('custom', 'd') }}</span></time>
+    </div>
+  {% endif %}
+  <div class="usa-collection__body">
+    {% if heading %}
+      <h4 class="usa-collection__heading">
+        {{ heading }}
+      </h4>
+    {% endif %}
+    {% if not is_headings_only and text %}
+      <div class="usa-collection__description">
+        {{ text }}
+      </div>
+    {% endif %}
+    {% if not is_calendar_display and (author_name or source or date) %}
+      <ul class="usa-collection__meta" aria-label="{{ "More Information" | t }}">
+        {% if source %}
+          <li class="usa-collection__meta-item">
+            <svg class="usa-icon position-relative bottom-neg-2px" aria-hidden="true" role="img">
+              <use xlink:href="/{{ directory }}/dist/assets/img/sprite.svg#public"></use>
+            </svg>
+            {{ source }}
+          </li>
+        {% else %}
+          {% if author_name %}
+            <li class="usa-collection__meta-item">
+              {{ "By @author_name" | t({ "@author_name" : author_name }) }}
+            </li>
+          {% endif %}
+          {% if date %}
+            <li class="usa-collection__meta-item">
+              <time datetime="{{ date | format_date('custom', 'Y-m-d\\TH:i:sP') }}">{{ date | format_date('custom', 'F j, Y') }}</time>
+            </li>
+          {% endif %}
+        {% endif %}
+      </ul>
+    {% endif %}
+    {% if not is_headings_only and not is_calendar_display and tags %}
+      <ul class="usa-collection__meta" aria-label="{{ "Collection Tags" | t }}">
+        {% for tag in tags %}
+          <li class="usa-collection__meta-item usa-tag">{{ tag }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</li>

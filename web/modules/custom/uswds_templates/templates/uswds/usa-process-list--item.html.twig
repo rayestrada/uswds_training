@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS process list item component.
+ *
+ * USWDS template variables:
+ * - is_large_text: boolean (true / false)
+ * - heading_level: string (h2, h3, h4)
+ * - heading: string
+ * - text: string
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-process-list-item.html.twig' with {
+ *   'is_large_text': var_is_large_text,
+ *   'heading_level': 'h2',
+ *   'heading': var_heading | field_value,
+ *   'text': var_text | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+
+{% set large_heading = 'font-sans-xl line-height-sans-1 padding-bottom-2' %}
+{% set large_text = 'font-sans-lg margin-top-1 text-light' %}
+
+{% set usa_classes = [
+  'usa-process-list__item',
+] %}
+
+<li{{ attributes.addClass(usa_classes | merge(classes | default([]))) }}>
+  {% if heading %}
+    <{{ heading_level | default('h2') }} class="usa-process-list__heading {{ is_large_text ? large_heading -}}">
+      {{ heading }}
+    </{{ heading_level | default('h2') }}>
+  {% endif %}
+  {% if text %}
+    <div class="usa-process-list__text {{ is_large_text ? large_text -}}">
+      {{ text }}
+    </div>
+  {% endif %}
+</li>

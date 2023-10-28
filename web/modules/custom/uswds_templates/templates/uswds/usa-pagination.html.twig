@@ -1,0 +1,123 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS pagination component.
+ *
+ * USWDS template variables:
+ * - items: renderable array of menu items
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-pagination.html.twig' with {
+ *   'items': var_items,
+ * } %}
+ *
+#}
+{% if items %}
+  <nav class="usa-pagination pager" role="navigation" aria-label="{{ 'Pagination'|t }}"
+       aria-labelledby="{{ heading_id }}">
+    <h4 id="{{ heading_id }}" class="visually-hidden">{{ 'Pagination'|t }}</h4>
+    <ul class="usa-pagination__list pager__items js-pager__items">
+
+      {# Print first item if we are not on the first page. #}
+      {% if items.first %}
+        <li class="usa-pagination__item pager__item pager__item--first">
+          <a
+            class="usa-pagination__link usa-pagination__previous-page"
+            href="{{ items.first.href }}"
+            title="{{ 'Go to first page'|t }}"{{ items.first.attributes|without('href', 'title') }}
+            aria-label="{{ 'First page'|t }}">
+
+            <svg class="usa-icon margin-top-1px" aria-hidden="true" role="img">
+              <use xlink:href="/{{ directory }}/dist/assets/img/sprite.svg#navigate_far_before"></use>
+            </svg>
+            <span class="usa-pagination__link-text">{{ 'First'|t }}</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {# Print previous item if we are not on the first page. #}
+      {% if items.previous %}
+        <li class="usa-pagination__item pager__item pager__item--previous">
+          <a class="usa-pagination__link usa-pagination__previous-page"
+             href="{{ items.previous.href }}"
+             title="{{ 'Go to previous page'|t }}"
+             rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}
+             aria-label="{{ 'Previous page'|t }}">
+
+            <svg class="usa-icon" aria-hidden="true" role="img">
+              <use xlink:href="/{{ directory }}/dist/assets/img/sprite.svg#navigate_before"></use>
+            </svg>
+
+            <span class="usa-pagination__link-text">{{ 'Previous'|t }}</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {# Add an ellipsis if there are further previous pages. #}
+      {% if ellipses.previous %}
+        <li class="usa-pagination__item pager__item pager__item--ellipsis usa-pagination__overflow"
+            role="presentation">&hellip;
+        </li>
+      {% endif %}
+
+      {# Now generate the actual pager piece. #}
+      {% for key, item in items.pages %}
+        <li class="usa-pagination__item usa-pagination__page-no pager__item{{ current == key ? ' is-active' : '' }}">
+          {% if current == key %}
+            {% set title = 'Current page'|t %}
+          {% else %}
+            {% set title = 'Go to page @key'|t({'@key': key}) %}
+          {% endif %}
+          <a class="usa-pagination__button" href="{{ item.href }}"
+             title="{{ title }}"{{ item.attributes|without('href', 'title') }}>
+            <span class="visually-hidden">
+              {{ current == key ? 'Current page'|t : 'Page'|t }}
+            </span>
+            {{- key -}}
+          </a>
+        </li>
+      {% endfor %}
+
+      {# Add an ellipsis if there are further next pages. #}
+      {% if ellipses.next %}
+        <li class="usa-pagination__item pager__item pager__item--ellipsis usa-pagination__overflow 555"
+            role="presentation">&hellip;
+        </li>
+      {% endif %}
+      {# Print next item if we are not on the last page. #}
+      {% if items.next %}
+        <li class="usa-pagination__item pager__item pager__item--next 666">
+          <a class="usa-pagination__link usa-pagination__next-page"
+             href="{{ items.next.href }}"
+             title="{{ 'Go to next page'|t }}"
+             rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}
+             aria-label="{{ 'Next page'|t }}">
+
+            <span class="usa-pagination__link-text">{{ 'Next'|t }}</span>
+
+            <svg class="usa-icon" aria-hidden="true" role="img">
+              <use xlink:href="/{{ directory }}/dist/assets/img/sprite.svg#navigate_next"></use>
+            </svg>
+          </a>
+        </li>
+      {% endif %}
+      {# Print last item if we are not on the last page. #}
+      {% if items.last %}
+        <li class="usa-pagination__item pager__item pager__item--last 777">
+          <a
+            class="usa-pagination__link usa-pagination__next-page"
+            href="{{ items.last.href }}"
+            title="{{ 'Go to last page'|t }}"{{ items.last.attributes|without('href', 'title') }}
+            aria-label="{{ 'Last page'|t }}">
+
+            <span class="usa-pagination__link-text">{{ 'Last'|t }}</span>
+
+            <svg class="usa-icon margin-top-1px" aria-hidden="true" role="img">
+              <use xlink:href="/{{ directory }}/dist/assets/img/sprite.svg#navigate_far_next"></use>
+            </svg>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

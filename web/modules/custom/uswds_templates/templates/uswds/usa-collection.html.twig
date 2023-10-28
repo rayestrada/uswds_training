@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS collection component.
+ *
+ * USWDS template variables:
+ * - collection_content: renderable field object value
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-collection.html.twig' with {
+ *   'collection_content': var_collection_content | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+{% set usa_classes = [
+  'usa-collection',
+] %}
+
+<ul{{ attributes.addClass(usa_classes | merge(classes | default([]))).removeAttribute('role').setAttribute('role', 'list') }}>
+  {{ collection_content }}
+</ul>

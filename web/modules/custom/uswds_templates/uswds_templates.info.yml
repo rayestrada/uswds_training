@@ -1,0 +1,6 @@
+name: 'USWDS component templates'
+type: module
+description: 'Provides USWDS component templates for leveraging in other modules or themes'
+core_version_requirement: ^9.4 || ^10
+package: 'USWDS'
+version: '3.3.0'

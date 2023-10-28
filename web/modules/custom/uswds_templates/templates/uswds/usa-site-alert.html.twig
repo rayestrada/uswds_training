@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS site alert component.
+ *
+ * USWDS template variables:
+ * - alert_aria: string
+ * - alert_type: string (info, emergency)
+ * - alert_slim: boolean (0 / 1)
+ * - alert_no_icon: boolean (0 / 1)
+ * - heading: string
+ * - text: string
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-site-alert.html.twig' with {
+ *   'alert_aria': var_alert_aria,
+ *   'alert_type': var_alert_style | field_value,
+ *   'alert_slim': var_alert_slim,
+ *   'alert_no_icon': var_alert_no_icon,
+ *   'heading': var_heading | field_value,
+ *   'text': var_text | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+
+{% set usa_classes = [
+  'usa-site-alert',
+  alert_type ? 'usa-site-alert--' ~ alert_type,
+  alert_slim == '1' ? 'usa-site-alert--slim',
+  alert_no_icon == '1' ? 'usa-site-alert--no-icon',
+] %}
+
+<section{{ attributes.addClass(usa_classes | merge(classes | default([]))).setAttribute('aria-label', alert_aria) }}>
+  <div class="usa-alert">
+    <div class="usa-alert__body">
+      {% if heading %}
+        <h2 class="usa-alert__heading">{{ heading }}</h2>
+      {% endif %}
+      {% if text %}
+        <div class="usa-alert__text">
+          {{ text }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

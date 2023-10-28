@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS language selector component.
+ *
+ * USWDS template variables:
+ * - items: renderable array of items
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-language-selector.html.twig' with {
+ *   'items': var_items,
+ * } %}
+ *
+#}
+
+<div class="usa-language-container usa-language--big">
+  {% if items.length == 2 %}
+    <a href="{{ item.link.url }}" lang="{{ key }}" xml:lang="{{ key }}">
+      <button type="button" class="usa-button" role="button">
+        {{ item.link.title }}
+      </button>
+    </a>
+  {% elseif items.length > 2 %}
+    <div class="usa-language__primary usa-accordion">
+      <button
+        type="button"
+        class="usa-button usa-language__link"
+        role="button"
+        aria-expanded="false"
+        aria-controls="language-options"
+      >
+        {{ 'Languages' | t }}
+      </button>
+      <ul id="language-options" class="usa-language__submenu" hidden="true">
+        {% for item in items %}
+          <li class="usa-language__submenu-item">
+            <a href="{{ item.link.url }}" lang="{{ key }}" xml:lang="{{ key }}">
+              <strong>{{ item.link.title }}</strong> {{ item.link.title_english ? "(#{item.link.title_english})" }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>

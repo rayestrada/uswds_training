@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS card group component.
+ *
+ * USWDS template variables:
+ * - card_item: renderable field object value
+ * - classes: classes array (inherits base template classes as default)
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-card.html.twig' with {
+ *   'card_item': var_card_item | field_value,
+ *   'classes': var_classes
+ * } %}
+ *
+#}
+{% set usa_classes = [
+  'usa-card-group',
+] %}
+
+<ul{{ attributes.addClass(usa_classes | merge(classes | default([]))) }}>
+  {{ card_item }}
+</ul>

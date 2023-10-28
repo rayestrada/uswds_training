@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS sidenav component.
+ *
+ * USWDS template variables:
+ * - items: renderable array of menu items
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-sidenav.html.twig' with {
+ *   'items': var_items,
+ * } %}
+ *
+#}
+
+{% if items %}
+  <nav aria-label="{{ 'Side navigation' | t }}">
+    <ul class="usa-sidenav">
+      {% for item in items %}
+        <li class="usa-sidenav__item">
+          <a href="{{ item.url }}" class="{{ item.current ? 'usa-current' }}">{{ item.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

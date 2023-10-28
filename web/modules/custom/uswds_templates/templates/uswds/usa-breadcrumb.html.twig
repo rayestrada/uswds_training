@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Default theme implementation to USWDS breacrumb component.
+ *
+ * USWDS template variables:
+ * - items: renderable array of menu items
+ *
+ * Usage example:
+ * {% include '@uswds_templates/uswds/usa-breadcrumb.html.twig' with {
+ *   'items': var_items,
+ * } %}
+ *
+#}
+
+{% if items %}
+  <nav class="usa-breadcrumb" aria-label="{{ 'Breadcrumbs' | t }}">
+    <ol class="usa-breadcrumb__list">
+      {% for item in items %}
+        {% if not item.url %}
+          <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+            <span>{{ item.text }}</span>
+          </li>
+        {% else %}
+          <li class="usa-breadcrumb__list-item">
+            <a href="{{ item.url }}" class="usa-breadcrumb__link">
+              <span>{{ item.text }}</span>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}
