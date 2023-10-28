@@ -5,26 +5,22 @@
  *
  * USWDS template variables:
  * - aria_label: string
- * - us_flag_small: url string
+ * - uswds_img: url path to image directory
  * - header_text: string
  * - header_action: string
  * - button_text: string
- * - icon_dot_gov: url string
  * - gov_text: string
- * - icon_https: url string
  * - https_text: string
  * - classes: classes array (inherits base template classes as default)
  *
  * Usage example:
  * {% include '@uswds_templates/uswds/usa-banner.html.twig' with {
  *   'aria_label': var_aria_label | field_value,
- *   'us_flag_small': var_us_flag_small,
+ *   'uswds_img': '/themes/custom/uswds_theme/dist/img/',
  *   'header_text': var_header_text | field_value,
  *   'header_action': var_header_action | field_value,
  *   'button_text': var_button_text | field_value,
- *   'icon_dot_gov': var_dot_gov,
  *   'gov_text': var_gov_text | field_value,
- *   'icon_https': var_icon_https,
  *   'https_text': var_https_text | field_value,
  *   'classes': var_classes
  * } %}
@@ -41,14 +37,12 @@
     <header class="usa-banner__header">
       <div class="usa-banner__inner">
         <div class="grid-col-auto">
-          {% if us_flag_small %}
-            <img
-              aria-hidden="true"
-              class="usa-banner__header-flag"
-              src="{{ us_flag_small }}"
-              alt=""
-            />
-          {% endif %}
+          <img
+            aria-hidden="true"
+            class="usa-banner__header-flag"
+            src="{{ uswds_img }}us_flag_small.png"
+            alt=""
+          />
         </div>
         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
           <p class="usa-banner__header-text">
@@ -72,29 +66,25 @@
     >
       <div class="grid-row grid-gap-lg">
         <div class="usa-banner__guidance tablet:grid-col-6">
-          {% if icon_dot_gov %}
-            <img
-              class="usa-banner__icon usa-media-block__img"
-              src="{{ icon_dot_gov }}"
-              role="img"
-              alt=""
-              aria-hidden="true"
-            />
-          {% endif %}
+          <img
+            class="usa-banner__icon usa-media-block__img"
+            src="{{ uswds_img }}icon-dot-gov.svg"
+            role="img"
+            alt=""
+            aria-hidden="true"
+          />
           <div class="usa-media-block__body">
             {{ gov_text }}
           </div>
         </div>
         <div class="usa-banner__guidance tablet:grid-col-6">
-          {% if icon_https %}
-            <img
-              class="usa-banner__icon usa-media-block__img"
-              src="{{ icon_https }}"
-              role="img"
-              alt=""
-              aria-hidden="true"
-            />
-          {% endif %}
+          <img
+            class="usa-banner__icon usa-media-block__img"
+            src="{{ uswds_img }}icon-https.svg"
+            role="img"
+            alt=""
+            aria-hidden="true"
+          />
           <div class="usa-media-block__body">
             {{ https_text }}
           </div>

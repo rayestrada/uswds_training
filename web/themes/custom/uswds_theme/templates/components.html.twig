@@ -1,0 +1,154 @@
+{#
+/**
+ * @file
+ * USWDS components.
+ */
+#}
+
+{% set uswds_img = '/themes/custom/uswds_theme/dist/img/' %}
+
+{# USWDS government banner #}
+
+{% include '@uswds_templates/uswds/usa-banner.html.twig' with {
+  'aria_label': 'Official website of the United States government' | t,
+  'header_text': 'An official website of the United States government' | t,
+  'button_text': 'Here’s how you know' | t,
+  'gov_text': {
+    '#markup': "<p>
+          <strong>Official websites use .gov</strong><br />
+          A <strong>.gov</strong> website belongs to an official government organization in the United States.
+        </p>"
+  },
+  'https_text': {
+    '#markup': "<p>
+        <strong>Secure .gov websites use HTTPS</strong><br />
+        A <strong>lock</strong> (<span class=\"icon-lock\">@</span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.
+      </p>"
+  }
+} %}
+
+{# USWDS simple header #}
+
+<div class="usa-overlay"></div>
+<header class="usa-header usa-header--extended">
+  <div class="usa-navbar">
+    <div class="usa-logo">
+      <em class="usa-logo__text"
+      ><a href="/" title="<Project title>">{{ drupal_config('system.site', 'name') }}</a></em
+      >
+    </div>
+    <button type="button" class="usa-menu-btn">Menu</button>
+  </div>
+  <nav aria-label="Primary navigation" class="usa-nav">
+    <div class="usa-nav__inner">
+      <button type="button" class="usa-nav__close">
+        <img src="{{ uswds_img }}usa-icons/close.svg" role="img" alt="Close"/>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link usa-current"
+            aria-expanded="false"
+            aria-controls="extended-nav-section-one"
+          >
+            <span>&lt;Current section&gt;</span>
+          </button>
+          <ul id="extended-nav-section-one" class="usa-nav__submenu">
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="extended-nav-section-two"
+          >
+            <span>&lt;Section&gt;</span>
+          </button>
+          <ul id="extended-nav-section-two" class="usa-nav__submenu">
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+              ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="javascript:void(0);" class="usa-nav-link"
+          ><span>&lt;Simple link&gt;</span></a
+          >
+        </li>
+      </ul>
+      <div class="usa-nav__secondary">
+        <ul class="usa-nav__secondary-links"></ul>
+        <section aria-label="Search component">
+          <form class="usa-search usa-search--small" role="search">
+            <label class="usa-sr-only" for="search-field">Search</label>
+            <input
+              class="usa-input"
+              id="search-field"
+              type="search"
+              name="search"
+            />
+            <button class="usa-button" type="submit">
+              <img
+                src="{{ uswds_img }}usa-icons-bg/search--white.svg"
+                class="usa-search__submit-icon"
+                alt="Search"
+              />
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{# USWDS Hero #}
+  {% include '@uswds_templates/uswds/usa-hero.html.twig' with {
+    'image_style_url': 'https://federalist-3b6ba08e-0df4-44c9-ac73-6fc193b0e19c.sites.pages.cloud.gov/preview/uswds/uswds/develop/hero.jpg',
+    'title_eyebrow': 'Hero callout:' | t,
+    'title': 'Bring attention to a project priority' | t,
+    'text': 'Support the callout with some short explanatory text. You don’t need more than a couple of sentences.' | t,
+    'link_title': 'Call to action' | t,
+    'link_url': '#',
+  } %}
+
+{# USWDS Alert #}
+
+{% include '@uswds_templates/uswds/usa-alert.html.twig' with {
+  'heading': "Alert heading",
+  'text': "Alert text content",
+  'classes': []
+} %}
