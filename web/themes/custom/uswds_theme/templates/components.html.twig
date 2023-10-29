@@ -2,6 +2,7 @@
 /**
  * @file
  * USWDS components.
+ * enable TWIG debugging: drush state:set twig_debug 1
  */
 #}
 
@@ -136,19 +137,20 @@
 </header>
 
 {# USWDS Hero #}
-  {% include '@uswds_templates/uswds/usa-hero.html.twig' with {
-    'image_style_url': 'https://federalist-3b6ba08e-0df4-44c9-ac73-6fc193b0e19c.sites.pages.cloud.gov/preview/uswds/uswds/develop/hero.jpg',
-    'title_eyebrow': 'Hero callout:' | t,
-    'title': 'Bring attention to a project priority' | t,
-    'text': 'Support the callout with some short explanatory text. You don’t need more than a couple of sentences.' | t,
-    'link_title': 'Call to action' | t,
-    'link_url': '#',
-  } %}
+{% include '@uswds_templates/uswds/usa-hero.html.twig' with {
+  'image_style_url': 'https://federalist-3b6ba08e-0df4-44c9-ac73-6fc193b0e19c.sites.pages.cloud.gov/preview/uswds/uswds/develop/hero.jpg',
+  'title_eyebrow': 'Hero callout:' | t,
+  'title': 'Bring attention to a project priority' | t,
+  'text': 'Support the callout with some short explanatory text. You don’t need more than a couple of sentences.' | t,
+  'link_title': 'Call to action' | t,
+  'link_url': '#',
+} %}
 
-{# USWDS Alert #}
+{# Site Alert #}
 
-{% include '@uswds_templates/uswds/usa-alert.html.twig' with {
-  'heading': "Alert heading",
-  'text': "Alert text content",
-  'classes': []
+{% include '@uswds_templates/uswds/usa-site-alert.html.twig' with {
+  'alert_aria': 'Site alert',
+  'alert_type': 'emergency',
+  'heading': 'Emergency alert message',
+  'text': 'Additional context and followup information including a link.',
 } %}
